@@ -1,0 +1,859 @@
+{
+	"info": {
+		"_postman_id": "00e3ad76-ab3c-46d6-b111-0a4c453acb2b",
+		"name": "API Estacionamento",
+		"description": "HAR To Postman Generated Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22741624"
+	},
+	"item": [
+		{
+			"name": "Estabelecimento",
+			"item": [
+				{
+					"name": "localhost:8080/estabelecimento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL1}}/estabelecimento",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"estabelecimento"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "created / 201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL1}}/estabelecimento",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"estabelecimento"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 17:08:26 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 3,\n \"nome\": \"Estabelecimento De Test Novo\",\n \"cnpj\": \"76208309000133\",\n \"endereco\": \"Rua aleatornia 42, com Bairro Testar\",\n \"telefone\": \"11991599997\",\n \"vagasMotos\": 20,\n \"vagasCarros\": 15,\n \"numeroDeCarrosEstacionados\": 0,\n \"numeroDeMotosEstacionados\": 0,\n \"veiculos\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/estabelecimento/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL1}}/estabelecimento/1",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"estabelecimento",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL1}}/estabelecimento/1",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"estabelecimento",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 Aug 2022 01:46:30 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "text/plain;charset=UTF-8 content type is not supported in the response body"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/estabelecimento/1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL1}}/estabelecimento/1",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"estabelecimento",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": " / 400",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL1}}/estabelecimento/1",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"estabelecimento",
+										"1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 Aug 2022 01:55:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"timestamp\": \"2022-08-09T01:55:20.456+00:00\",\n \"status\": 400,\n \"error\": \"Bad Request\",\n \"trace\": \"org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<java.lang.Object> com.estacionamento.restapi.controller.EstabelecimentoController.updateEstabelecimento(com.estacionamento.restapi.dtos.EstabelecimentoDTO,java.lang.Integer) throws com.estacionamento.restapi.exception.NotFoundException: [Field error in object 'estabelecimentoDTO' on field 'cnpj': rejected value [55664907000100]; codes [CNPJ.estabelecimentoDTO.cnpj,CNPJ.cnpj,CNPJ.java.lang.String,CNPJ]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [estabelecimentoDTO.cnpj,cnpj]; arguments []; default message [cnpj]]; default message [número do registro de contribuinte corporativo brasileiro (CNPJ) inválido]] \\r\\n\\tat org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:141)\\r\\n\\tat org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)\\r\\n\\tat org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:179)\\r\\n\\tat org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:146)\\r\\n\\tat org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)\\r\\n\\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)\\r\\n\\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)\\r\\n\\tat org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\\r\\n\\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)\\r\\n\\tat org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)\\r\\n\\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)\\r\\n\\tat org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:920)\\r\\n\\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:684)\\r\\n\\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)\\r\\n\\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:764)\\r\\n\\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)\\r\\n\\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\\r\\n\\tat org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)\\r\\n\\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\\r\\n\\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\\r\\n\\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)\\r\\n\\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)\\r\\n\\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\\r\\n\\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\\r\\n\\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)\\r\\n\\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)\\r\\n\\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\\r\\n\\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\\r\\n\\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)\\r\\n\\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)\\r\\n\\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\\r\\n\\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\\r\\n\\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)\\r\\n\\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)\\r\\n\\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)\\r\\n\\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)\\r\\n\\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)\\r\\n\\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)\\r\\n\\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)\\r\\n\\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)\\r\\n\\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)\\r\\n\\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:890)\\r\\n\\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1787)\\r\\n\\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\\r\\n\\tat org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)\\r\\n\\tat org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)\\r\\n\\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\\r\\n\\tat java.base/java.lang.Thread.run(Thread.java:833)\\r\\n\",\n \"message\": \"Validation failed for object='estabelecimentoDTO'. Error count: 1\",\n \"errors\": [\n  {\n   \"codes\": [\n    \"CNPJ.estabelecimentoDTO.cnpj\",\n    \"CNPJ.cnpj\",\n    \"CNPJ.java.lang.String\",\n    \"CNPJ\"\n   ],\n   \"arguments\": [\n    {\n     \"codes\": [\n      \"estabelecimentoDTO.cnpj\",\n      \"cnpj\"\n     ],\n     \"arguments\": null,\n     \"defaultMessage\": \"cnpj\",\n     \"code\": \"cnpj\"\n    }\n   ],\n   \"defaultMessage\": \"número do registro de contribuinte corporativo brasileiro (CNPJ) inválido\",\n   \"objectName\": \"estabelecimentoDTO\",\n   \"field\": \"cnpj\",\n   \"rejectedValue\": \"55664907000100\",\n   \"bindingFailure\": false,\n   \"code\": \"CNPJ\"\n  }\n ],\n \"path\": \"/estabelecimento/1\"\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/estabelecimento/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL1}}/estabelecimento/",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"estabelecimento",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL1}}/estabelecimento/",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"estabelecimento",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 17:11:17 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"id\": 1,\n  \"nome\": \"Testando 2\",\n  \"cnpj\": \"52950957000100\",\n  \"endereco\": \"Rua aleatornia 42\",\n  \"telefone\": \"11991599999\",\n  \"vagasMotos\": 20,\n  \"vagasCarros\": 40,\n  \"numeroDeCarrosEstacionados\": 0,\n  \"numeroDeMotosEstacionados\": 0,\n  \"veiculos\": []\n },\n {\n  \"id\": 3,\n  \"nome\": \"Estabelecimento De Test Novo\",\n  \"cnpj\": \"76208309000133\",\n  \"endereco\": \"Rua aleatornia 42, com Bairro Testar\",\n  \"telefone\": \"11991599997\",\n  \"vagasMotos\": 20,\n  \"vagasCarros\": 15,\n  \"numeroDeCarrosEstacionados\": 0,\n  \"numeroDeMotosEstacionados\": 0,\n  \"veiculos\": []\n },\n {\n  \"id\": 2,\n  \"nome\": \"Estabelecimento De Test\",\n  \"cnpj\": \"22989828000157\",\n  \"endereco\": \"Rua aleatornia 42, com Bairro Random\",\n  \"telefone\": \"11991599998\",\n  \"vagasMotos\": 1,\n  \"vagasCarros\": 1,\n  \"numeroDeCarrosEstacionados\": 1,\n  \"numeroDeMotosEstacionados\": 1,\n  \"veiculos\": [\n   {\n    \"id\": 1,\n    \"marca\": \"Hyundai 15\",\n    \"modelo\": \"Teste de Modelo\",\n    \"cor\": \"Azulzinho\",\n    \"placa\": \"FDS8355\",\n    \"tipo\": \"CARRO\"\n   }\n  ]\n }\n]"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/estabelecimento/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL1}}/estabelecimento/1",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"estabelecimento",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL1}}/estabelecimento/1",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"estabelecimento",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 03:13:32 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 1,\n \"nome\": \"Testando\",\n \"cnpj\": \"55664906000100\",\n \"endereco\": \"Rua aleatornia 42\",\n \"telefone\": \"11991599993\",\n \"vagasMotos\": 41,\n \"vagasCarros\": 41,\n \"numeroDeCarrosEstacionados\": 0,\n \"numeroDeMotosEstacionados\": 0,\n \"veiculos\": [\n  {\n   \"id\": 1,\n   \"marca\": \"Hyundai\",\n   \"modelo\": \"Sla mano kkk\",\n   \"cor\": \"Azulzinho\",\n   \"placa\": \"NDS8354\",\n   \"tipo\": \"CARRO\",\n   \"estabelecimento\": null\n  }\n ]\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/estabelecimento/cnpj/556649060001",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL1}}/estabelecimento/cnpj/556649060001",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"estabelecimento",
+								"cnpj",
+								"556649060001"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "not found / 404",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL1}}/estabelecimento/cnpj/556649060001",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"estabelecimento",
+										"cnpj",
+										"556649060001"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 Aug 2022 02:23:00 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"timestamp\": \"2022-08-08T23:23:00.2863274\",\n \"status\": 404,\n \"message\": \"Estabelecimento com CNPJ 556649060001 não foi encontrado\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Veículos",
+			"item": [
+				{
+					"name": "localhost:8080/veiculo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL1}}/veiculo",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"veiculo"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "created / 201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL1}}/veiculo",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"veiculo"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 17:10:14 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 2,\n \"marca\": \"Hyundai 2\",\n \"modelo\": \"Teste de Modelo\",\n \"cor\": \"Azulzinho\",\n \"placa\": \"HDS8345\",\n \"tipo\": \"CARRO\"\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/veiculo/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL1}}/veiculo/1",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"veiculo",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "not found / 404",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL1}}/veiculo/1",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"veiculo",
+										"1"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Aug 2022 23:13:03 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"timestamp\": \"2022-08-15T20:13:03.1188351\",\n \"status\": 404,\n \"message\": \"Veiculo com id 1 não foi encontrado\"\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/veiculo/1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL1}}/veiculo/1",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"veiculo",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL1}}/veiculo/1",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"veiculo",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 02:30:01 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 1,\n \"marca\": \"Hyundai\",\n \"modelo\": \"Sla mano kkk\",\n \"cor\": \"Azulzinho\",\n \"placa\": \"NDS8354\",\n \"tipo\": \"CARRO\",\n \"estabelecimento\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/veiculo/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL1}}/veiculo/",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"veiculo",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL1}}/veiculo/",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"veiculo",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 17:48:44 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"id\": 1,\n  \"marca\": \"Hyundai 15\",\n  \"modelo\": \"Teste de Modelo\",\n  \"cor\": \"Azulzinho\",\n  \"placa\": \"FDS8355\",\n  \"tipo\": \"CARRO\"\n },\n {\n  \"id\": 2,\n  \"marca\": \"Hyundai 2\",\n  \"modelo\": \"Teste de Modelo\",\n  \"cor\": \"Azulzinho\",\n  \"placa\": \"HDS8345\",\n  \"tipo\": \"CARRO\"\n }\n]"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/veiculo/2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL1}}/veiculo/2",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"veiculo",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL1}}/veiculo/2",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"veiculo",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 17:48:27 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 2,\n \"marca\": \"Hyundai 2\",\n \"modelo\": \"Teste de Modelo\",\n \"cor\": \"Azulzinho\",\n \"placa\": \"HDS8345\",\n \"tipo\": \"CARRO\"\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/veiculo/placa/HDS8345",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL1}}/veiculo/placa/HDS8345",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"veiculo",
+								"placa",
+								"HDS8345"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL1}}/veiculo/placa/HDS8345",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"veiculo",
+										"placa",
+										"HDS8345"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 17:48:51 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 2,\n \"marca\": \"Hyundai 2\",\n \"modelo\": \"Teste de Modelo\",\n \"cor\": \"Azulzinho\",\n \"placa\": \"HDS8345\",\n \"tipo\": \"CARRO\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ControleVeículos",
+			"item": [
+				{
+					"name": "localhost:8080/estabelecimento/2/entrada/2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL1}}/estabelecimento/2/entrada/2",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"estabelecimento",
+								"2",
+								"entrada",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": " / 400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL1}}/estabelecimento/2/entrada/2",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"estabelecimento",
+										"2",
+										"entrada",
+										"2"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 17:11:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"timestamp\": \"2022-08-17T14:11:48.9095877\",\n \"status\": 400,\n \"message\": \"As vagas do estabelecimento com CNPJ 22989828000157 já foram preenchidas\"\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/estabelecimento/1/saida/1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL1}}/estabelecimento/1/saida/1",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"estabelecimento",
+								"1",
+								"saida",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "successfully / 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL1}}/estabelecimento/1/saida/1",
+									"host": [
+										"{{baseURL1}}"
+									],
+									"path": [
+										"estabelecimento",
+										"1",
+										"saida",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 16:31:13 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "text/plain;charset=UTF-8 content type is not supported in the response body"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL1",
+			"value": "http://localhost:8080",
+			"type": "any"
+		}
+	]
+}
