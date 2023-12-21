@@ -31,54 +31,53 @@ public class EndpointRelatorioTest {
         mockMvc = MockMvcBuilders.standaloneSetup(endpointRelatorio).build();
     }
 
-    // Test methods will go here
-}
 
-@Test
-public void testListAllRelatorios() throws Exception {
-    Page<Relatorio> relatorioPage = new PageImpl<>(Arrays.asList(new Relatorio(), new Relatorio()));
-    when(repositoryRelatorio.findAll(any(PageRequest.class))).thenReturn(relatorioPage);
+    @Test
+    public void testListAllRelatorios() throws Exception {
+        Page<Relatorio> relatorioPage = new PageImpl<>(Arrays.asList(new Relatorio(), new Relatorio()));
+        when(repositoryRelatorio.findAll(any(PageRequest.class))).thenReturn(relatorioPage);
 
-    mockMvc.perform(get("/relatorio").contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.content").exists());
-}
+        mockMvc.perform(get("/relatorio").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").exists());
+    }
 
-@Test
-public void testAddRelatorio() throws Exception {
-    Relatorio relatorio = new Relatorio(); // Set necessary fields
-    String relatorioJson = /* convert relatorio to JSON */;
+    @Test
+    public void testAddRelatorio() throws Exception {
+        Relatorio relatorio = new Relatorio(); // Set necessary fields
+        String relatorioJson = /* convert relatorio to JSON */;
 
-    mockMvc.perform(post("/relatorio")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(relatorioJson))
-            .andExpect(status().isCreated());
+        mockMvc.perform(post("/relatorio")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(relatorioJson))
+                .andExpect(status().isCreated());
 
-    verify(repositoryRelatorio, times(1)).save(any(Relatorio.class));
-}
+        verify(repositoryRelatorio, times(1)).save(any(Relatorio.class));
+    }
 
-@Test
-public void testEditRelatorio() throws Exception {
-    Long id = 1L;
-    Relatorio relatorio = new Relatorio(); // Set necessary fields
-    String relatorioJson = /* convert relatorio to JSON */;
-    when(repositoryRelatorio.findById(id)).thenReturn(Optional.of(new Relatorio()));
+    @Test
+    public void testEditRelatorio() throws Exception {
+        Long id = 1L;
+        Relatorio relatorio = new Relatorio(); // Set necessary fields
+        String relatorioJson = /* convert relatorio to JSON */;
+        when(repositoryRelatorio.findById(id)).thenReturn(Optional.of(new Relatorio()));
 
-    mockMvc.perform(put("/relatorio/" + id)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(relatorioJson))
-            .andExpect(status().isOk());
+        mockMvc.perform(put("/relatorio/" + id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(relatorioJson))
+                .andExpect(status().isOk());
 
-    verify(repositoryRelatorio, times(1)).save(any(Relatorio.class));
-}
+        verify(repositoryRelatorio, times(1)).save(any(Relatorio.class));
+    }
 
-@Test
-public void testDeleteRelatorio() throws Exception {
-    Long id = 1L;
-    when(repositoryRelatorio.findById(id)).thenReturn(Optional.of(new Relatorio()));
+    @Test
+    public void testDeleteRelatorio() throws Exception {
+        Long id = 1L;
+        when(repositoryRelatorio.findById(id)).thenReturn(Optional.of(new Relatorio()));
 
-    mockMvc.perform(delete("/relatorio/" + id))
-            .andExpect(status().isOk());
+        mockMvc.perform(delete("/relatorio/" + id))
+                .andExpect(status().isOk());
 
-    verify(repositoryRelatorio, times(1)).deleteById(id);
+        verify(repositoryRelatorio, times(1)).deleteById(id);
+    }
 }

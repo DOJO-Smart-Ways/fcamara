@@ -31,54 +31,55 @@ public class EndpointEmpresaTest {
         mockMvc = MockMvcBuilders.standaloneSetup(endpointEmpresa).build();
     }
 
-    // Test methods will go here
-}
+    
 
-@Test
-public void testListAllEmpresas() throws Exception {
-    Page<Empresa> empresaPage = new PageImpl<>(Arrays.asList(new Empresa(), new Empresa()));
-    when(repositoryEmpresa.findAll(any(PageRequest.class))).thenReturn(empresaPage);
+    @Test
+    public void testListAllEmpresas() throws Exception {
+        Page<Empresa> empresaPage = new PageImpl<>(Arrays.asList(new Empresa(), new Empresa()));
+        when(repositoryEmpresa.findAll(any(PageRequest.class))).thenReturn(empresaPage);
 
-    mockMvc.perform(get("/empresa").contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.content").exists());
-}
+        mockMvc.perform(get("/empresa").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").exists());
+    }
 
-@Test
-public void testAddEmpresa() throws Exception {
-    Empresa empresa = new Empresa(); // Set necessary fields
-    String empresaJson = /* convert empresa to JSON */;
+    @Test
+    public void testAddEmpresa() throws Exception {
+        Empresa empresa = new Empresa(); // Set necessary fields
+        String empresaJson = /* convert empresa to JSON */;
 
-    mockMvc.perform(post("/empresa")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(empresaJson))
-            .andExpect(status().isCreated());
+        mockMvc.perform(post("/empresa")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(empresaJson))
+                .andExpect(status().isCreated());
 
-    verify(repositoryEmpresa, times(1)).save(any(Empresa.class));
-}
+        verify(repositoryEmpresa, times(1)).save(any(Empresa.class));
+    }
 
-@Test
-public void testEditEmpresa() throws Exception {
-    Long id = 1L;
-    Empresa empresa = new Empresa(); // Set necessary fields
-    String empresaJson = /* convert empresa to JSON */;
-    when(repositoryEmpresa.findById(id)).thenReturn(Optional.of(new Empresa()));
+    @Test
+    public void testEditEmpresa() throws Exception {
+        Long id = 1L;
+        Empresa empresa = new Empresa(); // Set necessary fields
+        String empresaJson = /* convert empresa to JSON */;
+        when(repositoryEmpresa.findById(id)).thenReturn(Optional.of(new Empresa()));
 
-    mockMvc.perform(put("/empresa/" + id)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(empresaJson))
-            .andExpect(status().isOk());
+        mockMvc.perform(put("/empresa/" + id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(empresaJson))
+                .andExpect(status().isOk());
 
-    verify(repositoryEmpresa, times(1)).save(any(Empresa.class));
-}
+        verify(repositoryEmpresa, times(1)).save(any(Empresa.class));
+    }
 
-@Test
-public void testDeleteEmpresa() throws Exception {
-    Long id = 1L;
-    when(repositoryEmpresa.findById(id)).thenReturn(Optional.of(new Empresa()));
+    @Test
+    public void testDeleteEmpresa() throws Exception {
+        Long id = 1L;
+        when(repositoryEmpresa.findById(id)).thenReturn(Optional.of(new Empresa()));
 
-    mockMvc.perform(delete("/empresa/" + id))
-            .andExpect(status().isOk());
+        mockMvc.perform(delete("/empresa/" + id))
+                .andExpect(status().isOk());
 
-    verify(repositoryEmpresa, times(1)).deleteById(id);
+        verify(repositoryEmpresa, times(1)).deleteById(id);
+    }
+
 }
