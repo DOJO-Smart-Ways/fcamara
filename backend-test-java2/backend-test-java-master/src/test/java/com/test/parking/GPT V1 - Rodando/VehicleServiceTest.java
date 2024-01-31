@@ -1,14 +1,13 @@
-package com.test.parking.service;
-
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.test.parking.model.Vehicle;
 import com.test.parking.repository.VehicleRepository;
-import org.junit.jupiter.api.BeforeEach;
+import com.test.parking.service.VehicleService;
+
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,17 +15,11 @@ import java.util.Optional;
 
 public class VehicleServiceTest {
 
+    @InjectMocks
     private VehicleService vehicleService;
 
     @Mock
     private VehicleRepository vehicleRepository;
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        vehicleService = new VehicleService();
-        vehicleService.vehicleRepository = vehicleRepository;
-    }
 
     @Test
     public void testAddVehicle() {

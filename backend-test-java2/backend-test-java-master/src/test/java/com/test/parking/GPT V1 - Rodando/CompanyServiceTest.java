@@ -1,13 +1,14 @@
-package com.test.parking.service;
-
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.test.parking.model.Company;
 import com.test.parking.repository.CompanyRepository;
-import org.junit.jupiter.api.BeforeEach;
+import com.test.parking.service.CompanyService;
+import com.test.parking.service.ParkingSpaceService;
+
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,20 +16,14 @@ import java.util.Optional;
 
 public class CompanyServiceTest {
 
-    private CompanyService companyService;
-
-    @MockBean
+    @Mock
     private CompanyRepository companyRepository;
 
-    @MockBean
-    private ParkingSpaceService parkingService;
+    @Mock
+    private ParkingSpaceService parkingSpaceService;
 
-    @BeforeEach
-    public void setUp() {
-        companyService = new CompanyService();
-        companyService.companyRepository = companyRepository;
-        companyService.parkingService = parkingService;
-    }
+    @InjectMocks
+    private CompanyService companyService;
 
     @Test
     public void testAddCompany() {
@@ -37,7 +32,7 @@ public class CompanyServiceTest {
 
         Company result = companyService.addCompany(company);
         verify(companyRepository).save(company);
-        verify(parkingService).companySpaces(company, company.getMotorcyclesSpace(), company.getCarsSpace());
+        verify(parkingSpaceService).companySpaces(company, company.getMotorcyclesSpace(), company.getCarsSpace());
         assertEquals(company, result);
     }
 
@@ -84,7 +79,7 @@ public class CompanyServiceTest {
         Company result = companyService.updateCompany(updatedCompany, id);
         verify(companyRepository).findById(id);
         verify(companyRepository).save(existingCompany);
-        verify(parkingService).companySpacesUpdate(existingCompany, existingCompany.getMotorcyclesSpace(), updatedCompany.getMotorcyclesSpace(), existingCompany.getCarsSpace(), updatedCompany.getCarsSpace());
+        verify(parkingSpaceService).companySpacesUpdate(existingCompany, existingCompany.getMotorcyclesSpace(), updatedCompany.getMotorcyclesSpace(), existingCompany.getCarsSpace(), updatedCompany.getCarsSpace());
         assertEquals(updatedCompany, result);
     }
 }

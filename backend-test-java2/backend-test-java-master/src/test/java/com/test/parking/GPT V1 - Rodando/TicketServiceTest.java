@@ -1,5 +1,3 @@
-package com.test.parking.service;
-
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,8 +7,12 @@ import com.test.parking.model.Vehicle;
 import com.test.parking.repository.ParkingSpaceRepository;
 import com.test.parking.repository.TicketRepository;
 import com.test.parking.repository.VehicleRepository;
+import com.test.parking.service.ParkingSpaceService;
+import com.test.parking.service.TicketService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -22,6 +24,7 @@ import java.util.Optional;
 
 public class TicketServiceTest {
 
+    @InjectMocks
     private TicketService ticketService;
 
     @Mock
@@ -35,16 +38,6 @@ public class TicketServiceTest {
 
     @Mock
     private ParkingSpaceRepository parkingRepository;
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        ticketService = new TicketService();
-        ticketService.ticketRepository = ticketRepository;
-        ticketService.parkingService = parkingService;
-        ticketService.vehicleRepository = vehicleRepository;
-        ticketService.parkingRepository = parkingRepository;
-    }
 
     @Test
     public void testEntranceTicket() {

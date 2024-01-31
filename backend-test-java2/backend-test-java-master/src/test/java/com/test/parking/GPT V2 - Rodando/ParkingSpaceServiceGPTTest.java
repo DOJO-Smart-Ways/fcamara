@@ -3,9 +3,24 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.test.parking.model.Company;
+import com.test.parking.model.ParkingSpace;
+import com.test.parking.model.SpaceStatus;
+import com.test.parking.repository.ParkingSpaceRepository;
+import com.test.parking.service.ParkingSpaceService;
+
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class ParkingSpaceServiceGPTTest {
@@ -82,7 +97,10 @@ public class ParkingSpaceServiceGPTTest {
 		int newCarsSpaces = 3;
 
 		// Mocking the repository call to return a list of ParkingSpace
-		when(parkingRepository.findAllSpaces("motorcycle")).thenReturn(/* Mocked list of ParkingSpace */);
+		List<ParkingSpace> spaces = new ArrayList<>();
+        spaces.add(new ParkingSpace());
+
+		when(parkingRepository.findAllSpaces("motorcycle")).thenReturn(spaces);
 
 		parkingSpaceService.companySpacesUpdate(company, motorSpacesBefore, newMotorcyclesSpaces, carSpacesBefore, newCarsSpaces);
 
@@ -113,7 +131,10 @@ public class ParkingSpaceServiceGPTTest {
 		int newCarsSpaces = 2;
 
 		// Mocking the repository call to return a list of ParkingSpace
-		when(parkingRepository.findAllSpaces("car")).thenReturn(/* Mocked list of ParkingSpace */);
+		List<ParkingSpace> spaces = new ArrayList<>();
+        spaces.add(new ParkingSpace());
+
+		when(parkingRepository.findAllSpaces("car")).thenReturn(spaces);
 
 		parkingSpaceService.companySpacesUpdate(company, motorSpacesBefore, newMotorcyclesSpaces, carSpacesBefore, newCarsSpaces);
 
