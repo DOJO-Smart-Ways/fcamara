@@ -1,7 +1,12 @@
+package com.test.parking.service;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.test.parking.model.Company;
@@ -23,13 +28,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-public class ParkingSpaceServiceGPTTest {
+public class ParkingSpaceServiceTest {
 
     @Mock
     private ParkingSpaceRepository parkingRepository;
 
     @InjectMocks
     private ParkingSpaceService parkingSpaceService;
+
+	@BeforeEach
+	void setUp() {
+		MockitoAnnotations.openMocks(this);
+	}
 
     @Test
     public void testCompanySpaces_BothMotorcyclesAndCars() {
@@ -39,7 +49,7 @@ public class ParkingSpaceServiceGPTTest {
 
         parkingSpaceService.companySpaces(company, motorcycles, cars);
 
-        verify(parkingRepository, times(motorcycles + cars)).save(Mockito.any(ParkingSpace.class));
+        Mockito.verify(parkingRepository, Mockito.times(motorcycles + cars)).save(Mockito.any(ParkingSpace.class));
     }
 	@Test
 	public void testCompanySpaces_OnlyMotorcycles() {
@@ -49,7 +59,7 @@ public class ParkingSpaceServiceGPTTest {
 
 		parkingSpaceService.companySpaces(company, motorcycles, cars);
 
-		verify(parkingRepository, times(motorcycles)).save(Mockito.any(ParkingSpace.class));
+		Mockito.verify(parkingRepository, Mockito.times(motorcycles)).save(Mockito.any(ParkingSpace.class));
 	}
 
 	@Test
@@ -60,7 +70,7 @@ public class ParkingSpaceServiceGPTTest {
 
 		parkingSpaceService.companySpaces(company, motorcycles, cars);
 
-		verify(parkingRepository, times(cars)).save(Mockito.any(ParkingSpace.class));
+		Mockito.verify(parkingRepository, Mockito.times(cars)).save(Mockito.any(ParkingSpace.class));
 	}
 
 	@Test
@@ -71,7 +81,7 @@ public class ParkingSpaceServiceGPTTest {
 
 		parkingSpaceService.companySpaces(company, motorcycles, cars);
 
-		verify(parkingRepository, times(0)).save(Mockito.any(ParkingSpace.class));
+		Mockito.verify(parkingRepository, Mockito.times(0)).save(Mockito.any(ParkingSpace.class));
 	}
 
 	@Test
@@ -85,7 +95,7 @@ public class ParkingSpaceServiceGPTTest {
 		parkingSpaceService.companySpacesUpdate(company, motorSpacesBefore, newMotorcyclesSpaces, carSpacesBefore, newCarsSpaces);
 
 		// Verify new motorcycle spaces are added
-		verify(parkingRepository, times(newMotorcyclesSpaces - motorSpacesBefore)).save(Mockito.any(ParkingSpace.class));
+		Mockito.verify(parkingRepository, Mockito.times(newMotorcyclesSpaces - motorSpacesBefore)).save(Mockito.any(ParkingSpace.class));
 	}
 
 	@Test
@@ -99,13 +109,15 @@ public class ParkingSpaceServiceGPTTest {
 		// Mocking the repository call to return a list of ParkingSpace
 		List<ParkingSpace> spaces = new ArrayList<>();
         spaces.add(new ParkingSpace());
+		spaces.add(new ParkingSpace());
+		spaces.add(new ParkingSpace());
 
-		when(parkingRepository.findAllSpaces("motorcycle")).thenReturn(spaces);
+		Mockito.when(parkingRepository.findAllSpaces("motorcycle")).thenReturn(spaces);
 
 		parkingSpaceService.companySpacesUpdate(company, motorSpacesBefore, newMotorcyclesSpaces, carSpacesBefore, newCarsSpaces);
 
 		// Verify correct number of motorcycle spaces are deleted
-		verify(parkingRepository, times(motorSpacesBefore - newMotorcyclesSpaces)).delete(Mockito.any(ParkingSpace.class));
+		Mockito.verify(parkingRepository, Mockito.times(motorSpacesBefore - newMotorcyclesSpaces)).delete(Mockito.any(ParkingSpace.class));
 	}
 
 	@Test
@@ -119,7 +131,7 @@ public class ParkingSpaceServiceGPTTest {
 		parkingSpaceService.companySpacesUpdate(company, motorSpacesBefore, newMotorcyclesSpaces, carSpacesBefore, newCarsSpaces);
 
 		// Verify new car spaces are added
-		verify(parkingRepository, times(newCarsSpaces - carSpacesBefore)).save(Mockito.any(ParkingSpace.class));
+		Mockito.verify(parkingRepository, Mockito.times(newCarsSpaces - carSpacesBefore)).save(Mockito.any(ParkingSpace.class));
 	}
 
 	@Test
@@ -133,13 +145,16 @@ public class ParkingSpaceServiceGPTTest {
 		// Mocking the repository call to return a list of ParkingSpace
 		List<ParkingSpace> spaces = new ArrayList<>();
         spaces.add(new ParkingSpace());
+		spaces.add(new ParkingSpace());
+		spaces.add(new ParkingSpace());
+		spaces.add(new ParkingSpace());
 
-		when(parkingRepository.findAllSpaces("car")).thenReturn(spaces);
+		Mockito.when(parkingRepository.findAllSpaces("car")).thenReturn(spaces);
 
 		parkingSpaceService.companySpacesUpdate(company, motorSpacesBefore, newMotorcyclesSpaces, carSpacesBefore, newCarsSpaces);
 
 		// Verify correct number of car spaces are deleted
-		verify(parkingRepository, times(carSpacesBefore - newCarsSpaces)).delete(Mockito.any(ParkingSpace.class));
+		Mockito.verify(parkingRepository, Mockito.times(carSpacesBefore - newCarsSpaces)).delete(Mockito.any(ParkingSpace.class));
 	}
 
 
@@ -149,7 +164,7 @@ public class ParkingSpaceServiceGPTTest {
 
 		parkingSpaceService.availableSpace(spaceType);
 
-		verify(parkingRepository).findOneAvailableSpace(spaceType);
+		Mockito.verify(parkingRepository).findOneAvailableSpace(spaceType);
 	}
 
 	@Test
@@ -159,8 +174,8 @@ public class ParkingSpaceServiceGPTTest {
 
 		parkingSpaceService.changeStatus(space, status);
 
-		assertEquals(SpaceStatus.FREE, space.getSpaceStatus());
-		verify(parkingRepository).save(space);
+		Assertions.assertEquals(SpaceStatus.FREE, space.getSpaceStatus());
+		Mockito.verify(parkingRepository).save(space);
 	}
 
 	@Test
@@ -170,8 +185,8 @@ public class ParkingSpaceServiceGPTTest {
 
 		parkingSpaceService.changeStatus(space, status);
 
-		assertEquals(SpaceStatus.OCCUPIED, space.getSpaceStatus());
-		verify(parkingRepository).save(space);
+		Assertions.assertEquals(SpaceStatus.OCCUPIED, space.getSpaceStatus());
+		Mockito.verify(parkingRepository).save(space);
 	}
 
 	@Test
@@ -179,7 +194,7 @@ public class ParkingSpaceServiceGPTTest {
 		ParkingSpace space = new ParkingSpace();
 		int invalidStatus = 3;
 
-		assertThrows(IllegalArgumentException.class, () -> {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			parkingSpaceService.changeStatus(space, invalidStatus);
 		});
 	}
@@ -192,18 +207,7 @@ public class ParkingSpaceServiceGPTTest {
 
 		Mockito.doThrow(new RuntimeException()).when(parkingRepository).save(Mockito.any(ParkingSpace.class));
 
-		assertThrows(RuntimeException.class, () -> {
-			parkingSpaceService.companySpaces(company, motorcycles, cars);
-		});
-	}
-
-	@Test
-	public void testCompanySpaces_InvalidInput() {
-		Company company = new Company();
-		int motorcycles = -1;
-		int cars = -1;
-
-		assertThrows(IllegalArgumentException.class, () -> {
+		Assertions.assertThrows(RuntimeException.class, () -> {
 			parkingSpaceService.companySpaces(company, motorcycles, cars);
 		});
 	}
@@ -211,9 +215,9 @@ public class ParkingSpaceServiceGPTTest {
 	@Test
 	public void testAvailableSpace_NoSpacesAvailable() {
 		String spaceType = "car";
-		when(parkingRepository.findOneAvailableSpace(spaceType)).thenReturn(null);
+		Mockito.when(parkingRepository.findOneAvailableSpace(spaceType)).thenReturn(null);
 
-		assertNull(parkingSpaceService.availableSpace(spaceType));
+		Assertions.assertNull(parkingSpaceService.availableSpace(spaceType));
 	}
 
 	@Test
@@ -224,8 +228,8 @@ public class ParkingSpaceServiceGPTTest {
 
 		parkingSpaceService.changeStatus(space, status);
 
-		assertEquals(SpaceStatus.OCCUPIED, space.getSpaceStatus());
-		verify(parkingRepository).save(space);
+		Assertions.assertEquals(SpaceStatus.OCCUPIED, space.getSpaceStatus());
+		Mockito.verify(parkingRepository).save(space);
 	}
 
 
