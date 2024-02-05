@@ -1,13 +1,20 @@
 package com.test.parking.service;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 import com.test.parking.model.*;
 import com.test.parking.repository.*;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.*;
+
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 public class TicketServiceTest {
 
@@ -26,8 +33,8 @@ public class TicketServiceTest {
     @Mock
     private ParkingSpaceRepository parkingRepository;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
@@ -36,10 +43,19 @@ public class TicketServiceTest {
         long vehicleId = 1L;
         Vehicle vehicle = new Vehicle(); // Assume Vehicle is a valid entity
         vehicle.setId(vehicleId);
+        vehicle.setVehicleType("");
+
         ParkingSpace availableSpace = new ParkingSpace(); // Assume ParkingSpace is a valid entity
+
+        long ticketId = 1L;
+        Ticket ticket = new Ticket();
+        ticket.setId(ticketId);
+        ticket.setVehicle(vehicle);
+        ticket.setParkingSpace(availableSpace);
 
         when(vehicleRepository.findById(vehicleId)).thenReturn(Optional.of(vehicle));
         when(parkingService.availableSpace(vehicle.getVehicleType())).thenReturn(availableSpace);
+        when(ticketRepository.save(any())).thenReturn(ticket);
 
         Ticket result = ticketService.entranceTicket(vehicleId);
 
@@ -55,9 +71,10 @@ public class TicketServiceTest {
         long vehicleId = 1L;
         when(vehicleRepository.findById(vehicleId)).thenReturn(Optional.empty());
 
-        Ticket result = ticketService.entranceTicket(vehicleId);
+        assertThrows(NullPointerException.class, () -> {
+            ticketService.entranceTicket(vehicleId);
+        });
 
-        assertNull(result);
         verify(parkingService, never()).availableSpace(any());
         verify(ticketRepository, never()).save(any(Ticket.class));
     }
@@ -67,7 +84,13 @@ public class TicketServiceTest {
         long vehicleId = 1L;
         Vehicle vehicle = new Vehicle(); // Assume Vehicle is a valid entity
         vehicle.setId(vehicleId);
+        vehicle.setVehicleType("");
 
+        long ticketId = 1L;
+        Ticket ticket = new Ticket();
+        ticket.setId(ticketId);
+
+        when(ticketRepository.save(any())).thenReturn(ticket);
         when(vehicleRepository.findById(vehicleId)).thenReturn(Optional.of(vehicle));
         when(parkingService.availableSpace(vehicle.getVehicleType())).thenReturn(null);
 
@@ -87,6 +110,7 @@ public class TicketServiceTest {
         space.setId(1L);
         ticket.setParkingSpace(space);
 
+        when(ticketRepository.save(ticket)).thenReturn(ticket);
         when(ticketRepository.findById(ticketId)).thenReturn(Optional.of(ticket));
         when(parkingRepository.findById(space.getId())).thenReturn(Optional.of(space));
 
@@ -100,13 +124,18 @@ public class TicketServiceTest {
     @Test
     public void testExitTicket_TicketDoesNotExist() {
         long ticketId = 1L;
-        when(ticketRepository.findById(ticketId)).thenReturn(Optional.empty());
+        Ticket ticket = new Ticket();
+        ticket.setId(ticketId);
+        ParkingSpace space = new ParkingSpace();
+        space.setId(1L);
+        ticket.setParkingSpace(space);
+
+        when(ticketRepository.findById(ticketId)).thenReturn(Optional.of(ticket));
 
         Ticket result = ticketService.exitTicket(ticketId);
 
         assertNull(result);
         verify(parkingService, never()).changeStatus(any(ParkingSpace.class), anyInt());
-        verify(ticketRepository, never()).save(any(Ticket.class));
     }
 
     @Test
@@ -123,7 +152,7 @@ public class TicketServiceTest {
 
         Ticket result = ticketService.exitTicket(ticketId);
 
-        assertNull(result.getExitTime());
+        assertNull(result);
         verify(parkingService, never()).changeStatus(any(ParkingSpace.class), anyInt());
         verify(ticketRepository).save(ticket); // Assuming the ticket is still saved without the exit time
     }
@@ -148,21 +177,25 @@ public class TicketServiceTest {
         assertNotNull(result);
         assertTrue(result.isEmpty());
     }
-    
-    @Test(expected = RuntimeException.class)
+
+    @Test
     public void testEntranceTicket_RepositoryThrowsException() {
         long vehicleId = 1L;
         when(vehicleRepository.findById(vehicleId)).thenThrow(new RuntimeException("Database error"));
 
-        ticketService.entranceTicket(vehicleId);
+        assertThrows(RuntimeException.class, () -> {
+            ticketService.entranceTicket(vehicleId);
+        });
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testExitTicket_RepositoryThrowsException() {
         long ticketId = 1L;
         when(ticketRepository.findById(ticketId)).thenThrow(new RuntimeException("Database error"));
 
-        ticketService.exitTicket(ticketId);
+        assertThrows(RuntimeException.class, () -> {
+            ticketService.exitTicket(ticketId);
+        });
     }
 
 

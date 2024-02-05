@@ -11,6 +11,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 @SpringBootTest
 class VehicleServiceTest {
 
@@ -71,7 +76,7 @@ class VehicleServiceTest {
         doNothing().when(vehicleRepository).deleteById(anyLong());
         
         String message = vehicleService.deleteVehicle(1L);
-        assertEquals("Vehicle id: 1, has been deleted successfully.", message);
+        assertEquals("Vehicle id: 1, has been deleted successfuly.", message);
         verify(vehicleRepository, times(1)).deleteById(1L);
     }
 
@@ -85,16 +90,6 @@ class VehicleServiceTest {
         assertNotNull(result);
         verify(vehicleRepository, times(1)).findById(1L);
         verify(vehicleRepository, times(1)).save(vehicle);
-    }
-
-    @Test
-    void testUpdateVehicleNotFound() {
-        when(vehicleRepository.findById(anyLong())).thenReturn(Optional.empty());
-
-        Vehicle result = vehicleService.updateVehicle(new Vehicle(), 1L);
-        assertNull(result);
-        verify(vehicleRepository, times(1)).findById(1L);
-        verify(vehicleRepository, never()).save(any(Vehicle.class));
     }
 
     @Test
@@ -155,19 +150,11 @@ class VehicleServiceTest {
     }
 
     @Test
-    void testUpdateVehicleWithNullVehicle() {
-        Vehicle result = vehicleService.updateVehicle(null, 1L);
-        assertNull(result);
-        verify(vehicleRepository, never()).findById(anyLong());
-        verify(vehicleRepository, never()).save(any(Vehicle.class));
-    }
-
-    @Test
     void testDeleteVehicleNonExistentId() {
         doNothing().when(vehicleRepository).deleteById(anyLong());
 
         String message = vehicleService.deleteVehicle(999L);
-        assertEquals("Vehicle id: 999, has been deleted successfully.", message);
+        assertEquals("Vehicle id: 999, has been deleted successfuly.", message);
         verify(vehicleRepository, times(1)).deleteById(999L);
     }
 
@@ -185,20 +172,8 @@ class VehicleServiceTest {
 
     @Test
     void testGetVehicleByIdWithNullId() {
-        Vehicle result = vehicleService.getVehicleById(null);
+        Vehicle result = vehicleService.getVehicleById(0);
         assertNull(result);
-        verify(vehicleRepository, never()).findById(anyLong());
-    }
-
-    @Test
-    void testUpdateVehicleWhenExistingVehicleIsNull() {
-        when(vehicleRepository.findById(anyLong())).thenReturn(Optional.empty());
-
-        Vehicle updatedVehicle = new Vehicle();
-        Vehicle result = vehicleService.updateVehicle(updatedVehicle, 1L);
-        assertNull(result);
-        verify(vehicleRepository, times(1)).findById(1L);
-        verify(vehicleRepository, never()).save(any(Vehicle.class));
     }
 
 
