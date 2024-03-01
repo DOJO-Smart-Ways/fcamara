@@ -54,7 +54,7 @@ To substantially improve the legacy code's quality, maintainability, and scalabi
 
 ### For Phase 2 and 3 - RAG Framework Components for Legacy Code Testing
 
-[illustractive figure](https://github.com/DOJO-Smart-Ways/fcamara/blob/java-backend-tests/detailed_rag_example.png)
+[illustractive figure](https://github.com/DOJO-Smart-Ways/fcamara/blob/java-backend-tests/rag_detailed_v6.png)
 
 #### Input:
 - **Code**: The primary input for the RAG system, where the existing legacy codebase serves as a foundation for test case generation and analysis. By indexing the code, the system can understand its structure, dependencies, and areas lacking coverage.
