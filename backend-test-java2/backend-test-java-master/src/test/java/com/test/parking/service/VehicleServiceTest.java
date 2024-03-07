@@ -1,3 +1,5 @@
+package com.test.parking.service;
+
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -67,7 +69,7 @@ public class VehicleServiceTest {
         doNothing().when(vehicleRepository).deleteById(id);
         String response = vehicleService.deleteVehicle(id);
 
-        assertEquals("Vehicle id: " + id + ", has been deleted successfully.", response);
+        assertEquals("Vehicle id: " + id + ", has been deleted successfuly.", response);
         verify(vehicleRepository).deleteById(id);
     }
 

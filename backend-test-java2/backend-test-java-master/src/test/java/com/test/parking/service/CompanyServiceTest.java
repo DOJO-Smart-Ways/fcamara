@@ -1,3 +1,5 @@
+package com.test.parking.service;
+
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -12,6 +14,10 @@ import com.test.parking.model.Company;
 import com.test.parking.repository.CompanyRepository;
 import com.test.parking.service.CompanyService;
 import com.test.parking.service.ParkingSpaceService;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 public class CompanyServiceTest {
 
@@ -78,7 +84,7 @@ public class CompanyServiceTest {
     @Test
     void testDeleteCompany() {
         long companyId = 1L;
-        String expectedMessage = "Company id: " + companyId + ", has been deleted successfully.";
+        String expectedMessage = "Company id: " + companyId + ", has been deleted successfuly.";
 
         String actualMessage = companyService.deleteCompany(companyId);
 

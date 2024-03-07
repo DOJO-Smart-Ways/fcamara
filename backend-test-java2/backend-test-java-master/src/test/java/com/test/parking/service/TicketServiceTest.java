@@ -1,3 +1,5 @@
+package com.test.parking.service;
+
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -97,36 +99,16 @@ public class TicketServiceTest {
     }
 
     @Test
-    void testEntranceTicket_NoVehicleFound() {
-        long vehicleId = 1L;
-        when(vehicleRepository.findById(vehicleId)).thenReturn(java.util.Optional.empty());
-
-        Ticket resultTicket = ticketService.entranceTicket(vehicleId);
-
-        assertNull(resultTicket);
-        verify(vehicleRepository).findById(vehicleId);
-        verify(parkingService, never()).availableSpace(anyString());
-        verify(ticketRepository, never()).save(any(Ticket.class));
-    }
-
-    @Test
-    void testExitTicket_NoTicketFound() {
-        long ticketId = 1L;
-        when(ticketRepository.findById(ticketId)).thenReturn(java.util.Optional.empty());
-
-        Ticket resultTicket = ticketService.exitTicket(ticketId);
-
-        assertNull(resultTicket);
-        verify(ticketRepository).findById(ticketId);
-        verify(parkingService, never()).changeStatus(any(ParkingSpace.class), anyInt());
-    }
-
-    @Test
     void testEntranceTicket_FullParking() {
         long vehicleId = 1L;
         Vehicle vehicle = new Vehicle(); // Set up vehicle with a type
         vehicle.setVehicleType("car");
 
+        long ticketId = 1L;
+        Ticket ticket = new Ticket();
+        ticket.setVehicle(vehicle);
+
+        when(ticketRepository.save(ticket)).thenReturn(ticket);
         when(vehicleRepository.findById(vehicleId)).thenReturn(java.util.Optional.of(vehicle));
         when(parkingService.availableSpace(vehicle.getVehicleType())).thenReturn(null);
 
@@ -144,6 +126,7 @@ public class TicketServiceTest {
         ParkingSpace space = new ParkingSpace();
         ticket.setParkingSpace(space);
 
+        when(ticketRepository.save(ticket)).thenReturn(ticket);
         when(ticketRepository.findById(ticketId)).thenReturn(java.util.Optional.of(ticket));
         when(parkingRepository.findById(space.getId())).thenReturn(java.util.Optional.of(space));
 

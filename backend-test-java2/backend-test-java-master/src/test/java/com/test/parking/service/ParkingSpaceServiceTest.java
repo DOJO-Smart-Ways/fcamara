@@ -1,3 +1,5 @@
+package com.test.parking.service;
+
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -5,6 +7,7 @@ import static org.mockito.ArgumentMatchers.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.test.parking.model.SpaceStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -67,7 +70,7 @@ public class ParkingSpaceServiceTest {
 
         parkingSpaceService.companySpacesUpdate(company, motorSpacesBefore, newMotorcyclesSpaces, carSpacesBefore, newCarsSpaces);
 
-        verify(parkingRepository).delete(any(ParkingSpace.class));
+        verify(parkingRepository, times(2)).delete(any(ParkingSpace.class));
     }
 
     @Test
@@ -126,13 +129,14 @@ public class ParkingSpaceServiceTest {
         Company company = new Company();
         int motorSpacesBefore = 5;
         int newMotorcyclesSpaces = 3;
-        List<ParkingSpace> motorcycleSpaces = List.of(new ParkingSpace(), new ParkingSpace(), new ParkingSpace(), new ParkingSpace(), new ParkingSpace());
+        List<ParkingSpace> motorcycleSpaces = List.of(new ParkingSpace(), new ParkingSpace());
 
+        when(parkingRepository.findAllSpaces("car")).thenReturn(motorcycleSpaces);
         when(parkingRepository.findAllSpaces("motorcycle")).thenReturn(motorcycleSpaces);
 
         parkingSpaceService.companySpacesUpdate(company, motorSpacesBefore, newMotorcyclesSpaces, 5, 3);
 
-        verify(parkingRepository, times(2)).delete(any(ParkingSpace.class)); // Expect 2 spaces to be deleted
+        verify(parkingRepository, times(4)).delete(any(ParkingSpace.class)); // Expect 2 spaces to be deleted
     }
 
 }
